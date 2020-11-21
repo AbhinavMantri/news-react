@@ -23,10 +23,10 @@ class News extends React.PureComponent {
         const { app, match } = props || {};
 
         if(!app.newsDetail[match.params.title]) 
-            this.props.newsAction(constants.ACTIONS.FIND_NEWS, { title: this.props.match.params.title });
+            this.props.newsAction(constants.ACTIONS.FIND_NEWS, { title: match.params.title });
         
         if(!app.relatedNews[match.params.title])    
-            this.props.newsAction(constants.ACTIONS.RELATED_NEWS, { title: this.props.match.params.title });
+            this.props.newsAction(constants.ACTIONS.RELATED_NEWS, { title: match.params.title });
     }
 
     render() {
