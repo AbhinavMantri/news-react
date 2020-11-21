@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 import constants from '../constants';
 import { newsAction } from '../actions';
+import Loader from '../components/commons/Loader';
 
 
 class News extends React.PureComponent {
@@ -28,9 +29,19 @@ class News extends React.PureComponent {
     }
 
     render() {
+        const { app, match } = this.props || {};
+        const { newsDetail } = app || {};
+        const { Content } = Layout;
+
         return (
-            <Layout className="site-layout">
+            <Layout className="site-layout news-detail">
                 <div className="site-layout-background">
+                    {newsDetail[match.params.title] ?
+                        <Content>
+                        </Content>
+                        :
+                        <Loader />
+                    }
                 </div>
             </Layout>        
         );
