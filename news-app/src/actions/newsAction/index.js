@@ -7,7 +7,9 @@ export default (action, args) => (dispatch) => {
         case constants.ACTIONS.GET_TOP_HEADLINES: 
             return getTopHeadlines(action, { dispatch, args });
         case constants.ACTIONS.GET_NEWS:
-            return getNews(action, { dispatch, args });    
+            return getNews(action, { dispatch, args });  
+        case constants.ACTIONS.SET_NEWS_PROVIDER:
+            return dispatch({type: action, payload: args});      
         default: 
             return null; 
     }

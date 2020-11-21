@@ -4,21 +4,21 @@ import { Layout } from 'antd';
 import { connect } from 'react-redux';
 
 import Header from './partials/Header';
-import { appAction } from './actions';
+import { appAction, newsAction } from './actions';
 import constants from './constants';
 import Sidebar from './partials/Sidebar';
 
 const { Content } = Layout;
 
 class NewsApp extends React.PureComponent { 
-    constructor(props) {
-        super(props);
-        this.state = {
-            selectedProvider: props.match.params.provider,
-        };
-    }
     componentDidMount() { 
         this.props.appAction(constants.ACTIONS.GET_SOURCES); 
+    }
+
+    onChangeProvider(id) {
+        this.setState({ selectedProvider: id });
+        this.props.history.push(`/${id}`);
+        this.props.newsAction(constants.ACTIONS.SET_NEWS_PROVIDER, id);
     }
 
     render() { 
@@ -28,7 +28,7 @@ class NewsApp extends React.PureComponent {
                 <Header /> 
                 <Content style={{ padding: '0 50px' }}> 
                     <Layout className="site-layout-background" style={{ padding: '24px 0' }}> 
-                        <Sidebar sources={app.sources} selected={this.state.selectedProvider} onClick={id => this.props.history.push(`/${id}`)} /> 
+                        <Sidebar sources={app.sources} selected={app.selectedProvider} onClick={id => this.onChangeProvider(id)} /> 
                         <Content style={{ padding: '0 24px', minHeight: 280 }}> {this.props.children} </Content> 
                     </Layout>
                 </Content> 
@@ -39,4 +39,4 @@ class NewsApp extends React.PureComponent {
 
 const mapStateToProps = ({ app }) => { return { app }; }
 
-export default connect(mapStateToProps, { appAction })(withRouter(NewsApp));
+export default withRouter(connect(mapStateToProps, { appAction, newsAction })(NewsApp));

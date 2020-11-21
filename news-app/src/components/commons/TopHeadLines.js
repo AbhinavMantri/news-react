@@ -5,7 +5,7 @@ import withLoader from '../../hoc/withLoader';
 
 const TopHeadlines = ({ topheadlines }) => {
     return (
-        <>
+        <div className="top-headlines">
             <h4 className="top-head">Top HeadLines</h4> 
             <Row>  
                 {topheadlines.map(t => { 
@@ -24,7 +24,7 @@ const TopHeadlines = ({ topheadlines }) => {
                     ); 
                 })}
             </Row> 
-        </>
+        </div>
     );  
 }
 

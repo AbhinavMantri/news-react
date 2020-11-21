@@ -35,3 +35,7 @@
     overflow: hidden;
     overflow-y: auto;
 }
+
+.top-headlines {
+    padding-left: 12px;
+}

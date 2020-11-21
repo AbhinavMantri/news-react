@@ -3,6 +3,7 @@ import { Card, Row, Col } from 'antd';
 import withLoader from '../../hoc/withLoader';
 
 import defaultImg from '../../assets/img/default-news-card.png';
+import NoData from '../commons/NoData';
 
 const Home = props => {
     const { news } = props || {};
@@ -32,6 +33,9 @@ const Home = props => {
                             </Col>
                         );
                     })}
+                    {data && data.length === 0 &&
+                        <NoData />
+                    }
                 </Row>
             </div>      
         </>

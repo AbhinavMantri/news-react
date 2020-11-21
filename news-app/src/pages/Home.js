@@ -21,14 +21,19 @@ class HomePage extends React.PureComponent {
         this.onNewsScrollCall = debounce(this.requestNews, 300);
     }
 
+    componentDidMount() {
+        this.props.newsAction(constants.ACTIONS.SET_NEWS_PROVIDER, this.props.match.params.provider);
+    }
+
     componentWillReceiveProps(newProps) {
         if(newProps.app.sources && newProps.app.sources.length > 0 && newProps.app.sources !== this.props.app.sources) {
-            this.setState({source: newProps.app.sources[0].id });
-            this.requestNewsProvider(newProps.app.sources[0]);
+            const provider = newProps.match.params.provider ? newProps.app.sources.find(d => d.id === newProps.match.params.provider) : newProps.app.sources[0];
+            this.setState({source: provider.id });
+            this.requestNewsProvider(provider);
         }
 
         if(newProps.match.params.provider !== this.props.match.params.provider) {
-            this.requestNewsProvider(newProps.match.params.provider || newProps.app.sources[0]);    
+            this.requestNewsProvider(newProps.match.params.provider ? {id: newProps.match.params.provider} : newProps.app.sources[0]);    
         }
     }
 
@@ -50,7 +55,6 @@ class HomePage extends React.PureComponent {
     }
 
     onNewsScroll(e) {
-        console.log(e.target.sc);
         if (e.target.scrollTop >= (e.target.scrollHeight - e.target.clientHeight - 5)) {
             const { app } = this.props || {};
             const { providers } = app || {};
