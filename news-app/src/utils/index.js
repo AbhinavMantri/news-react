@@ -1,19 +1,13 @@
-export const debounce = (func, wait, immediate) => {
-    let timeout;
-    return () => {
+export const debounce = (fn, dely) => {
+  let timer;
+
+  return function() {
       const context = this;
-      const args = [func, wait, immediate];
-      const later = () => {
-        timeout = null;
-        if (!immediate) {
-          func.apply(context, args);
-        }
-      }
-      const callNow = immediate && !timeout;
-      clearTimeout(timeout)
-      timeout = setTimeout(later, wait);
-      if (callNow) {
-        func.apply(context, args);
-      }
-    };
+      const args = arguments;
+      clearTimeout(timer);
+      
+      timer = setTimeout(() => {
+        fn.call(context, ...args);    
+      }, dely);
+  }
 }

@@ -18,12 +18,12 @@ class HomePage extends React.PureComponent {
             source: null,
         };
 
-        // this.onNewsScrollCall = debounce(this.requestNews, 300);
+        this.onNewsScrollCall = debounce(this.requestNews, 300);
     }
 
     componentWillReceiveProps(newProps) {
         if(newProps.app.sources && newProps.app.sources.length > 0 && newProps.app.sources !== this.props.app.sources) {
-            this.setState({source: newProps.app.sources[0] });
+            this.setState({source: newProps.app.sources[0].id });
             this.requestNewsProvider(newProps.app.sources[0]);
         }
 
@@ -50,16 +50,14 @@ class HomePage extends React.PureComponent {
     }
 
     onNewsScroll(e) {
-        const maxScroll = e.target.scrollingElement.offsetHeight;
-        const scrollPos = window.scrollY + window.innerHeight;
+        console.log(e.target.sc);
+        if (e.target.scrollTop >= (e.target.scrollHeight - e.target.clientHeight - 5)) {
+            const { app } = this.props || {};
+            const { providers } = app || {};
+            const { news } = providers[this.state.source] || {};
 
-        // if (scrollPos >= (maxScroll - 100)) {
-        //     const { app } = this.props || {};
-        //     const { providers } = app || {};
-        //     const { news } = providers[this.state.source] || {};
-
-        //     this.onNewsScrollCall(this.state.source, news.page ? news.page + 1 : 1);
-        // }
+            this.onNewsScrollCall(this.state.source, news.page ? news.page + 1 : 1);
+        }
     }
 
     render() {

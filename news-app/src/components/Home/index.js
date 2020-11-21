@@ -10,7 +10,7 @@ const Home = props => {
 
     return (
         <>
-            <div className="news-list" onScroll={e => props.onNewsScroll(e)}>
+            <div className="news-list" onScroll={e => props.onNewsScroll(e, page + 1)}>
                 <Row>
                     {data.map(d => {
                         return (
