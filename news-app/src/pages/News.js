@@ -8,8 +8,23 @@ import { newsAction } from '../actions';
 
 class News extends React.PureComponent {
     componentDidMount() {
-        this.props.newsAction(constants.ACTIONS.FIND_NEWS, { title: this.props.match.params.title });
-        this.props.newsAction(constants.ACTIONS.RELATED_NEWS, { title: this.props.match.params.title });
+       this.requestNews();
+    }
+
+    componentWillReceiveProps(newProps) {
+        if(newProps.match.params.title !== this.props.match.params.title) {
+            this.requestNews(newProps);
+        }
+    }
+
+    requestNews(props = this.props) {
+        const { app, match } = props || {};
+
+        if(!app.newsDetail[match.params.title]) 
+            this.props.newsAction(constants.ACTIONS.FIND_NEWS, { title: this.props.match.params.title });
+        
+        if(!app.relatedNews[match.params.title])    
+            this.props.newsAction(constants.ACTIONS.RELATED_NEWS, { title: this.props.match.params.title });
     }
 
     render() {
