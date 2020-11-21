@@ -8,6 +8,8 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import store from './store';
 
+window.debounce 
+
 ReactDOM.hydrate(
   <React.StrictMode>
     <Provider store={store}>

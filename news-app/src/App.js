@@ -12,7 +12,7 @@ function App() {
     <NewsApp>
       <Switch>
         <Route path={"/about"} exact component={About} />
-        <Route path={"/"} exact component={Home} />
+        <Route path={"/:provider?"} exact component={Home} />
       </Switch>
     </NewsApp>
   );
