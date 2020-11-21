@@ -6,6 +6,7 @@ import constants from '../constants';
 import { newsAction } from '../actions';
 import Loader from '../components/commons/Loader';
 
+import '../assets/news.css';
 
 class News extends React.PureComponent {
     componentDidMount() {
