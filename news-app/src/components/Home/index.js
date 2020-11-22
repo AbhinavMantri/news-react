@@ -24,6 +24,7 @@ const Home = props => {
                                             src={d.urlToImage && d.urlToImage !== "null" ? d.urlToImage : defaultImg}
                                         />
                                     }
+                                    onClick={() => props.onNewsClick(d.title)}
                                 >
                                     <Card.Meta
                                         title={d.title}

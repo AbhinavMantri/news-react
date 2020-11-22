@@ -84,6 +84,7 @@ class HomePage extends React.PureComponent {
                                         show={news}
                                         news={news}
                                         onNewsScroll={e => this.onNewsScroll(e)}
+                                        onNewsClick={title => this.props.history.push(`/news/${title}`)}
                                     />
                                 </Col>
                                 <Col span={8}>

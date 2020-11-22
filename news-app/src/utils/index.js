@@ -11,3 +11,7 @@ export const debounce = (fn, dely) => {
       }, dely);
   }
 }
+
+export const convertKeyPharse = (str, replaceStr = 'AND') => {
+  return str.replace(/\s/g, ` ${replaceStr} `);
+}

@@ -11,7 +11,7 @@ function App() {
   return (
     <NewsApp>
       <Switch>
-        <Route path={"/news/:id"} exact component={News} />
+        <Route path={"/news/:title"} exact component={News} />
         <Route path={"/:provider?"} exact component={Home} />
       </Switch>
     </NewsApp>
